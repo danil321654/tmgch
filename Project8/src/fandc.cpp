@@ -93,7 +93,7 @@ int game::menu()
 	}
 	else if (bufferSize.Y == 15)return 0;
 	else if (bufferSize.Y == 13)loadgame(0, " ");
-	else loadgame(1, gampr()); 
+	else loadgame(1, ngame()); 
 	}
 bool game::rusure()
 {
@@ -126,7 +126,7 @@ bool game::rusure()
 	if(bufferSize.X == 24)return 1;
 	else return 0;
 }
-std::string game::ava()
+bool ava(std::string name)
 {
 	system("cls");
 
@@ -138,10 +138,56 @@ std::string game::ava()
 
 	SetConsoleCursorPosition(hWnd, bufferSize);
 	std::cout.width(40);
-	std::cout.setf(std::ios::right);
 
 	std::string pets[2];
-	pets[1]= R"(
+	pets[1] = shwcat();
+	pets[0] = shwdog();
+	system("cls");
+	bufferSize.X = 40;
+	bufferSize.Y = 5;
+	SetConsoleCursorPosition(hWnd, bufferSize);
+	std::cout << name;
+	bufferSize.X = 75;
+	bufferSize.Y = 10;
+	SetConsoleCursorPosition(hWnd, bufferSize);
+	std::cout << pets[1];
+	char c = 0;
+	bool d = 0;
+	while (c != 13)
+	{
+		c = _getch();
+		if (c == 75 && d)
+		{
+			system("cls");
+			bufferSize.X = 40;
+			bufferSize.Y = 5;
+			SetConsoleCursorPosition(hWnd, bufferSize);
+			std::cout << name;
+			bufferSize.X = 75;
+			bufferSize.Y = 10;
+			SetConsoleCursorPosition(hWnd, bufferSize);
+			std::cout << pets[d];
+			d = 0;
+		}
+		else if (c == 77 && !d)
+		{
+			system("cls");
+			bufferSize.X = 40;
+			bufferSize.Y = 5;
+			SetConsoleCursorPosition(hWnd, bufferSize);
+			std::cout << name;
+			bufferSize.X = 75;
+			bufferSize.Y = 10;
+			SetConsoleCursorPosition(hWnd, bufferSize);
+			std::cout << pets[d];
+			d = 1;
+		}
+	}
+	return !d;
+}
+std::string shwcat()
+{
+	return R"(
        ,
        \`-._           __
         \\  `-..____,.'  `.
@@ -170,7 +216,10 @@ std::string game::ava()
 .-'. _.'\      / `;      \,__:      \
 `---'    `----'   ;      /    \,.,,,/
                    `----`    )";
-	pets[0] = R"(
+}
+std::string shwdog()
+{
+	return  R"(
               ,
            __.                                              
         .-".'                      .--.            _..._    
@@ -206,44 +255,4 @@ std::string game::ava()
                       ;     , `.                
                       :   \  ; :                
                       '..__L.:-' )";
-		SetConsoleCursorPosition(hWnd, bufferSize);
-	std::cout << pets[0];
-	char c = 0;
-	bool d = 0;
-	while (c != 13)
-	{
-		c = _getch();
-		if (c == 75 && d)
-		{
-			system("cls");
-			bufferSize.X = 40;
-			bufferSize.Y = 5;
-
-			SetConsoleCursorPosition(hWnd, bufferSize);
-			std::cout << "catto";
-			bufferSize.X = 75;
-			bufferSize.Y = 10;
-
-			SetConsoleCursorPosition(hWnd, bufferSize);
-			std::cout << pets[d];
-			d = 0;
-		}
-		else if (c == 77 && !d)
-		{
-			system("cls");
-
-			bufferSize.X = 40;
-			bufferSize.Y = 5;
-
-			SetConsoleCursorPosition(hWnd, bufferSize);
-			std::cout << "doggo";
-			bufferSize.X = 75;
-			bufferSize.Y = 10;
-
-			SetConsoleCursorPosition(hWnd, bufferSize);
-			std::cout << pets[d];
-			d = 1;
-		}
-	}
-	return pets[!d];
 }

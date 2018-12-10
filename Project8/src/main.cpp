@@ -11,7 +11,7 @@ int main()
 	case 3:return 0;
 	case 2: {tmgch.loadgame(0, " "); return 0; }
 	case 1: {
-		tmgch.loadgame(1, gampr());
+		tmgch.loadgame(1, ngame());
 		return 0; }
 	default: return 0;
 	}*/

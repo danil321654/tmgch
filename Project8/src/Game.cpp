@@ -1,5 +1,5 @@
 #include"fandc.h"
-std::string gampr() 
+std::string ngame() 
 {
 	system("cls");
 	setlocale(LC_ALL, "");
@@ -18,25 +18,30 @@ std::string gampr()
 	return a;
 
 }
-std::string *game::loadgame(bool x,std::string fname)
+std::string game::loadgame(bool x,std::string fname)
 {
 	system("cls");
 
 	setlocale(LC_ALL, "");
 	HANDLE hWnd = GetStdHandle(STD_OUTPUT_HANDLE); //захватывает консоль
 	COORD bufferSize = { 1200, 600 }; //izmenenie bufera
+	CreateDirectory("saves", NULL);
 	if (x==1)
 	{
-		fname = fname + ".txt";
-		const char * finame = fname.c_str();
+		
 		std::ifstream file;
+		std::string fname1 = "saves//" + fname + ".txt";
+		const char * finame = fname1.c_str();
 		file.open(finame);
 
 		if (file)
 		{
+			
 			char c = 0;
 			while (c != 13)
 				{
+
+				
 				bufferSize.X = 35;
 				bufferSize.Y = 11; //izmenenie koordinat tochki
 				SetConsoleCursorPosition(hWnd, bufferSize);// peremeshenie kursora
@@ -59,10 +64,13 @@ std::string *game::loadgame(bool x,std::string fname)
 
 				}
 			if (bufferSize.X != 24) menu(); 
+			return 0;
 		}
 		
-		std::ofstream file1(fname);
-		std::string *b = &fname;
+		std::ofstream file1;
+		file1.open(finame);
+		file1 << ava(fname) << " 0 100 0 0 0"<< std::endl;
+		
 	}
 	else
 	{
@@ -74,12 +82,11 @@ std::string *game::loadgame(bool x,std::string fname)
 		bufferSize.X = 49;
 		SetConsoleCursorPosition(hWnd, bufferSize);// peremeshenie kursora
 		getline(std::cin, a);
-		std::string *b = &a;
-		*b = *b + ".txt";
+		a = "saves//" + a + ".txt";
 		const char * finame = a.c_str();
-		std::ifstream file1;
-		file1.open(finame);
-		if (!file1) 
+		std::ifstream file;
+		file.open(finame);
+		if (!file) 
 		{
 			system("cls");
 			bufferSize.X = 20;
@@ -89,15 +96,23 @@ std::string *game::loadgame(bool x,std::string fname)
 			char c = 0;
 			while (c != 13) c = _getch();
 			menu();
-			return 0;
 		}
-	}
-	bufferSize.X = 40;
-	bufferSize.Y = 5;
 
-	SetConsoleCursorPosition(hWnd, bufferSize);
-	std::cout << fname;
-	ava();
+	}
+
+}
+void gamepr(std::string fname)
+{
+	std::string fname2 = "saves//" + fname + ".txt";
+	const char * filname = fname2.c_str();
+	std::ifstream readsv(filname);
+	pet tuz;
+	bool av;
+	std::string pctr;
+	readsv >>av>> tuz.hngr >> tuz.mood >> tuz.skil >> tuz.hlth >> tuz.age;
+	if (av) pctr = shwcat();
+	else pctr = shwdog();
+	
 }
 
 /*int pet::action(int *a, double tm, int)
