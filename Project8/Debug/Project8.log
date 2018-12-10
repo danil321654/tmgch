@@ -1,7 +1,0 @@
-﻿  Game.cpp
-  fandc.cpp
-  main.cpp
-  Generating Code...
-c:\users\даниил\source\repos\project8\project8\fandc.cpp(97): warning C4715: 'game::menu': not all control paths return a value
-c:\users\даниил\source\repos\project8\project8\fandc.cpp(248): error C4716: 'game::ava': must return a value
-c:\users\даниил\source\repos\project8\project8\game.cpp(104): warning C4715: 'game::loadgame': not all control paths return a value
