@@ -16,7 +16,8 @@ void gamepr(std::string);
 int menu();
 void printmenu();
 void printingamemenu();
-void printpetstatus(int,int,int,int,int,double);
+void printpetstatus();
+void printpetstatus2(int,int,int,int,int,double);
 bool rusure();
 void loadgame(bool,std::string);
 class pet
@@ -24,5 +25,5 @@ class pet
 	public:
 	int hngr, mood, skil, hlth, enrg;
 	double time,age;
-	static int action(int*,double,int);
+	static void action(int*,double,int);
 };

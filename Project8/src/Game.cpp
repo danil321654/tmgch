@@ -68,7 +68,7 @@ void loadgame(bool x,std::string fname)
 		
 		std::ofstream file1;
 		file1.open(finame);
-		file1 << ava(fname) << "0 100 0 100 100 0"<< std::endl;
+		file1 << ava(fname) << " 0 100 0 100 100 0"<< std::endl;
 		gamepr(fname);
 	}
 	else
@@ -101,9 +101,121 @@ void loadgame(bool x,std::string fname)
 	
 }
 
-int pet::action(int *a, double tm, int)
+void pet::action(int *a, double tm, int act)
 {
-	return 1;
+	switch (act)
+	{
+	case 1:
+	{
+		*a = *a + 2 * tm;
+		if (*a > 100)*a = 100;
+		for (int i = 0; i < tm; i++)
+		{
+
+			system("cls");
+			std::cout << "playing";
+			Sleep(250);
+			std::cout << ".";
+			Sleep(250);
+			std::cout << ".";
+			Sleep(250);
+			std::cout << ".";
+			Sleep(250);
+
+		}
+		break;
+	}
+	case 2:
+	{
+		*a = *a - 2 * tm;
+		if (*a < 0)*a = 0;
+		for (int i = 0; i < tm; i++)
+		{
+
+			system("cls");
+			std::cout << "feeding";
+			Sleep(250);
+			std::cout << ".";
+			Sleep(250);
+			std::cout << ".";
+			Sleep(250);
+			std::cout << ".";
+			Sleep(250);
+
+		}
+		break;
+	}
+	case 3:
+	{
+		*a = *a + tm;
+		if (*a > 100)*a = 100;
+		for (int i = 0; i < tm; i++)
+		{
+
+			system("cls");
+			std::cout << "curing";
+			Sleep(250);
+			std::cout << ".";
+			Sleep(250);
+			std::cout << ".";
+			Sleep(250);
+			std::cout << ".";
+			Sleep(250);
+
+		}
+		break;
+	}
+	case 4:
+	{
+		*a = *a + tm / 2;
+		if (*a > 100)*a = 100;
+		for (int i = 0; i < tm; i++)
+		{
+
+			system("cls");
+			std::cout << "training";
+			Sleep(250);
+			std::cout << ".";
+			Sleep(250);
+			std::cout << ".";
+			Sleep(250);
+			std::cout << ".";
+			Sleep(250);
+
+		}
+		break;
+	}
+	case 5:
+	{
+		*a = *a + tm;
+		if (*a > 100)*a = 100;
+		for (int i = 0; i < tm; i++)
+		{
+
+			system("cls");
+			std::cout << "sleeping";
+			Sleep(250);
+			std::cout << ".";
+			Sleep(250);
+			std::cout << ".";
+			Sleep(250);
+			std::cout << ".";
+			Sleep(250);
+
+		}
+		break;
+	}
+	case 6:
+	{
+		*a = *a - tm;
+		break;
+	}
+	case 7:
+	{
+		*a = *a + tm;
+		break;
+	}
+	}
 }
 void gamepr(std::string fname)
 {
@@ -119,33 +231,65 @@ void gamepr(std::string fname)
 	else pctr = shwdog();
 	char prsdkey=0;
 	int y=20;
+	system("cls");
+	setlocale(LC_ALL, "");
+	HANDLE hWnd = GetStdHandle(STD_OUTPUT_HANDLE); //захватывает консоль
+	COORD bufferSize = { 1200, 600 }; //izmenenie bufera
+	bufferSize.X = 20;
+	if (av == 0) bufferSize.Y = 7;
+	else bufferSize.Y = 11;
+	SetConsoleCursorPosition(hWnd, bufferSize);// peremeshenie kursora
+	std::cout << pctr << std::endl;
+	std::cout << fname << std::endl;
+	printingamemenu();
+	printpetstatus();
 	while (1)
 	{
-		system("cls");
-		setlocale(LC_ALL, "");
-		HANDLE hWnd = GetStdHandle(STD_OUTPUT_HANDLE); //захватывает консоль
-		COORD bufferSize = { 1200, 600 }; //izmenenie bufera
-		bufferSize.X = 20;
-		if(av==0) bufferSize.Y = 7;
-		else bufferSize.Y = 11;
-		SetConsoleCursorPosition(hWnd, bufferSize);// peremeshenie kursora
-		std::cout << pctr << std::endl;
-		std::cout << fname << std::endl;
-		printingamemenu();
-		printpetstatus(tuz.hngr , tuz.mood , tuz.skil , tuz.hlth ,tuz.enrg, tuz.age);
+		printpetstatus2(tuz.hngr , tuz.mood , tuz.skil , tuz.hlth ,tuz.enrg, tuz.age);
 		
 		if (prsdkey == 80)
 		{
-			if (y != 38 &&y!=30) y = y + 2;
-			if (y ==30) y = 38;
+			if (y != 38 && y != 30)
+			{
+				
+				bufferSize.Y = y;
+				bufferSize.X = 54;
+				SetConsoleCursorPosition(hWnd, bufferSize);
+				std::cout.width(50);
+				std::cout << std::right << "    " << std::endl;
+				y = y + 2;
+			}
+			if (y == 30) { 
+				bufferSize.Y = y;
+				bufferSize.X = 54;
+				SetConsoleCursorPosition(hWnd, bufferSize);
+				std::cout.width(50);
+				std::cout << std::right << "    " << std::endl;
+				y = 38;
+			}
 		}
 		if (prsdkey == 72)
 		{
-			if (y != 20 && y != 38)	y = y - 2;
-			if (y == 38) y = 28;
+			if (y != 20 && y != 38) {
+				bufferSize.Y = y;
+				bufferSize.X = 54;
+				SetConsoleCursorPosition(hWnd, bufferSize);
+				std::cout.width(50);
+				std::cout << std::right << "    " << std::endl;
+				y = y - 2;
+			}
+			if (y == 38)
+			{
+				bufferSize.Y = y;
+				bufferSize.X = 54;
+				SetConsoleCursorPosition(hWnd, bufferSize);
+				std::cout.width(50);
+				std::cout << std::right << "    " << std::endl;
+				y = 28;
+			}
 		}
 		bufferSize.Y = y;
-		bufferSize.X = 55;
+		bufferSize.X = 54;
 		SetConsoleCursorPosition(hWnd, bufferSize);
 		std::cout.width(50);
 		std::cout << std::right << ">>>>" << std::endl;
@@ -153,7 +297,7 @@ void gamepr(std::string fname)
 		if (prsdkey == 13)
 		{
 			double time=0;
-			while (time > 20 || time < 5)
+			while (time > 10 || time < 5)
 			{
 				system("cls");
 				setlocale(LC_ALL, "");
@@ -162,19 +306,49 @@ void gamepr(std::string fname)
 				bufferSize.X = 40;
 				bufferSize.Y = 8;
 				SetConsoleCursorPosition(hWnd, bufferSize);
-				std::cout << "Duration of an activity?" << std::endl;
+				std::cout << "Duration of an activity? (in sec, 4<time<11)" << std::endl;
 				bufferSize.X = 40;
 				bufferSize.Y = 9;
 				SetConsoleCursorPosition(hWnd, bufferSize);
 				std::cin>>time;
 			}
-			if (y == 20) pet::action(&tuz.mood, time, 1);
-			if (y == 22) pet::action(&tuz.mood, time, 2);
-			if (y == 24) pet::action(&tuz.mood, time, 1);
-			if (y == 26) pet::action(&tuz.mood, time, 1);
-			if (y == 35) pet::action(&tuz.mood, time, 1);
-		}
+			if (y == 20&&tuz.enrg>20&&tuz.hngr<80) {
+				pet::action(&tuz.mood, time, play);
+				pet::action(&tuz.enrg, time, 6);
+				pet::action(&tuz.hngr, time, 7);
+			}
+			else
+			{
+				bufferSize.X = 40;
+				bufferSize.Y = 9;
+				SetConsoleCursorPosition(hWnd, bufferSize);
+				if (tuz.enrg <= 20)std::cout << "too low energy" << std::endl;
+				else if (tuz.hngr > 80) std::cout << "too hungry" << std::endl;
+			}
 
+			if (y == 22) pet::action(&tuz.hngr, time, feed);
+			if (y == 24 && tuz.enrg > 20 && tuz.hngr < 80) {
+				pet::action(&tuz.skil, time, train);
+				pet::action(&tuz.enrg, time, 6);
+				pet::action(&tuz.hngr, time, 7);
+			}
+			else
+			{
+				bufferSize.X = 40;
+				bufferSize.Y = 9;
+				SetConsoleCursorPosition(hWnd, bufferSize);
+				if (tuz.enrg <= 20)std::cout << "too low energy" << std::endl;
+				else if (tuz.hngr > 80) std::cout << "too hungry" << std::endl;
+			}
+			if (y == 26) pet::action(&tuz.hlth, time, cure);
+			if (y == 28) pet::action(&tuz.enrg, time, sleep);
+			system("cls");
+			printpetstatus();
+			std::cout << pctr << std::endl;
+			std::cout << fname << std::endl;
+			printingamemenu();
+		}
+		
 	}
 	
 }
@@ -192,15 +366,14 @@ void printingamemenu()
 	SetConsoleCursorPosition(hWnd, bufferSize);
 	std::cout.width(50);
 	std::cout <<  std::right << "Feed" << std::endl;
-
 	bufferSize.Y = 24;
 	SetConsoleCursorPosition(hWnd, bufferSize);
 	std::cout.width(50);
-	std::cout <<  std::right << "Cure" << std::endl;
+	std::cout <<  std::right << "Train" << std::endl;
 	bufferSize.Y = 26;
 	SetConsoleCursorPosition(hWnd, bufferSize);
 	std::cout.width(50);
-	std::cout <<  std::right << "Train" << std::endl;
+	std::cout <<  std::right << "Cure" << std::endl;
 	bufferSize.Y = 28;
 	SetConsoleCursorPosition(hWnd, bufferSize);
 	std::cout.width(50);
@@ -210,7 +383,7 @@ void printingamemenu()
 	std::cout.width(50);
 	std::cout << std::right << "Exit" << std::endl;
 }
-void printpetstatus(int hngr, int mood, int skil,int hlth, int enrg, double age)
+void printpetstatus()
 {
 	setlocale(LC_ALL, "");
 	HANDLE hWnd = GetStdHandle(STD_OUTPUT_HANDLE); //захватывает консоль
@@ -218,20 +391,45 @@ void printpetstatus(int hngr, int mood, int skil,int hlth, int enrg, double age)
 	bufferSize.X = 5;
 	bufferSize.Y = 4;
 	SetConsoleCursorPosition(hWnd, bufferSize);
-	std::cout << "Hunger: " << hngr << std::endl;
+	std::cout << "Hunger: " <<  std::endl;
 	bufferSize.X = 23;
 	SetConsoleCursorPosition(hWnd, bufferSize);
-	std::cout << "Mood: " << mood << std::endl;
+	std::cout << "Mood: " <<  std::endl;
 	bufferSize.X = 41;
 	SetConsoleCursorPosition(hWnd, bufferSize);
-	std::cout << "Skills: " << skil << std::endl;
+	std::cout << "Skills: " <<  std::endl;
 	bufferSize.X = 59;
 	SetConsoleCursorPosition(hWnd, bufferSize);
-	std::cout << "Health: " << hlth << std::endl;
+	std::cout << "Health: " <<  std::endl;
 	bufferSize.X = 77;
 	SetConsoleCursorPosition(hWnd, bufferSize);
-	std::cout << "Energy: " << enrg << std::endl;
+	std::cout << "Energy: " <<  std::endl;
 	bufferSize.X = 95;
 	SetConsoleCursorPosition(hWnd, bufferSize);
-	std::cout << "Age: " << age << " yo" << std::endl;
+	std::cout << "Age: " <<  " yo" << std::endl;
+}
+void printpetstatus2(int hngr, int mood, int skil, int hlth, int enrg, double age)
+{
+	setlocale(LC_ALL, "");
+	HANDLE hWnd = GetStdHandle(STD_OUTPUT_HANDLE); //захватывает консоль
+	COORD bufferSize = { 1200, 600 };
+	bufferSize.X = 13;
+	bufferSize.Y = 4;
+	SetConsoleCursorPosition(hWnd, bufferSize);
+	std::cout << hngr << std::endl;
+	bufferSize.X = 29;
+	SetConsoleCursorPosition(hWnd, bufferSize);
+	std::cout << mood << std::endl;
+	bufferSize.X = 49;
+	SetConsoleCursorPosition(hWnd, bufferSize);
+	std::cout <<  skil << std::endl;
+	bufferSize.X = 67;
+	SetConsoleCursorPosition(hWnd, bufferSize);
+	std::cout <<  hlth << std::endl;
+	bufferSize.X = 85;
+	SetConsoleCursorPosition(hWnd, bufferSize);
+	std::cout <<  enrg << std::endl;
+	bufferSize.X = 100;
+	SetConsoleCursorPosition(hWnd, bufferSize);
+	std::cout << age << " yo" << std::endl;
 }
