@@ -13,17 +13,16 @@ std::string shwcat();
 std::string shwdog();
 bool ava(std::string);
 void gamepr(std::string);
-class game {
-	public: 
-	int menu();
-	void printmenu();
-	bool rusure();
-	std::string loadgame(bool,std::string);
-};
+int menu();
+void printmenu();
+void printingamemenu();
+void printpetstatus(int,int,int,int,int,double);
+bool rusure();
+void loadgame(bool,std::string);
 class pet
 {
 	public:
-	int hngr, mood, skil, hlth;
+	int hngr, mood, skil, hlth, enrg;
 	double time,age;
-	int action(int*,double,int);
+	static int action(int*,double,int);
 };

@@ -2,9 +2,8 @@
 #include"fandc.h"
 int main()
 {
-	game tmgch;
 	loadscreen();
-	tmgch.menu();
+	menu();
 	/*switch (tmgch.menu())
 	{
 	case 4:return 0;
