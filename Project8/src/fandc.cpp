@@ -77,10 +77,13 @@ int menu()
 	char c = 0;
 	bufferSize.X = 85;
 	SetConsoleCursorPosition(hWnd, bufferSize);
+	
+		printmenu();
 	while (c != 13)
 	{
-		system("cls");
-		printmenu();
+
+		SetConsoleCursorPosition(hWnd, bufferSize);
+		std::cout << "            " << std::endl;
 		if (c == 80) if (bufferSize.Y != 17) bufferSize.Y = bufferSize.Y + 2;
 		if (c == 72) if (bufferSize.Y != 11) bufferSize.Y = bufferSize.Y - 2;
 		SetConsoleCursorPosition(hWnd, bufferSize);
@@ -255,4 +258,62 @@ std::string shwdog()
                         ;     , `.                
                         :   \  ; :)               
                         '..__L.:-' )";
+}
+void saveorno(int *bol)
+{
+	setlocale(LC_ALL, "");
+	HANDLE hWnd = GetStdHandle(STD_OUTPUT_HANDLE);
+	COORD bufferSize = { 1200, 600 };
+	system("cls");
+
+	char c = 0;
+
+	bufferSize.Y = 12;
+	bufferSize.X = 54;
+	SetConsoleCursorPosition(hWnd, bufferSize);
+	std::cout << "Do you want to save?" << std::endl;
+	bufferSize.X = 6;
+	bufferSize.Y = 14;
+	SetConsoleCursorPosition(hWnd, bufferSize);
+	std::cout << "YES						NO						Cancel" << std::endl;
+	int x = 10;
+	bufferSize.X = x;
+	while (c != 13)
+	{
+		
+		
+
+		if (c == 77 && x == 10)
+		{
+			SetConsoleCursorPosition(hWnd, bufferSize);
+			std::cout << "            " << std::endl;
+			x = 59;
+			bufferSize.X = x;
+		}
+		else if (c == 77 && x == 59) {
+			SetConsoleCursorPosition(hWnd, bufferSize);
+			std::cout << "            " << std::endl;
+			x = 111;
+			bufferSize.X = x;
+		}
+		else if (c == 75 && x == 59) {
+			SetConsoleCursorPosition(hWnd, bufferSize);
+			std::cout << "            " << std::endl;
+			x = 10;
+			bufferSize.X = x;
+		}
+		else if (c == 75 && x == 111) {
+			SetConsoleCursorPosition(hWnd, bufferSize);
+			std::cout << "            " << std::endl;
+			x = 59;
+			bufferSize.X = x;
+		}
+		SetConsoleCursorPosition(hWnd, bufferSize);
+		std::cout << "<<<<<<<<<<<<" << std::endl;
+		c = _getch();
+
+	}
+	if (bufferSize.X == 10) *bol=0;
+	else if (bufferSize.X == 59) *bol = 1;
+	else if (bufferSize.X == 111) *bol = 2;
 }

@@ -18,6 +18,7 @@ void printmenu();
 void printingamemenu();
 void printpetstatus();
 void printpetstatus2(int,int,int,int,int,double);
+void saveorno(int*);
 bool rusure();
 void loadgame(bool,std::string);
 class pet

@@ -249,7 +249,7 @@ void gamepr(std::string fname)
 		
 		if (prsdkey == 80)
 		{
-			if (y != 38 && y != 30)
+			if (y != 38 && y != 28)
 			{
 				
 				bufferSize.Y = y;
@@ -259,7 +259,7 @@ void gamepr(std::string fname)
 				std::cout << std::right << "    " << std::endl;
 				y = y + 2;
 			}
-			if (y == 30) { 
+			else if (y == 28) { 
 				bufferSize.Y = y;
 				bufferSize.X = 54;
 				SetConsoleCursorPosition(hWnd, bufferSize);
@@ -278,7 +278,7 @@ void gamepr(std::string fname)
 				std::cout << std::right << "    " << std::endl;
 				y = y - 2;
 			}
-			if (y == 38)
+			else if (y == 38)
 			{
 				bufferSize.Y = y;
 				bufferSize.X = 54;
@@ -306,11 +306,12 @@ void gamepr(std::string fname)
 				bufferSize.X = 40;
 				bufferSize.Y = 8;
 				SetConsoleCursorPosition(hWnd, bufferSize);
-				std::cout << "Duration of an activity? (in sec, 4<time<11)" << std::endl;
+				if(y!=38)std::cout << "Duration of an activity? (in sec, 4<time<11)" << std::endl;
 				bufferSize.X = 40;
 				bufferSize.Y = 9;
 				SetConsoleCursorPosition(hWnd, bufferSize);
-				std::cin>>time;
+				if (y != 38)std::cin>>time;
+				else time = 5;
 			}
 			if (y == 20&&tuz.enrg>20&&tuz.hngr<80) {
 				pet::action(&tuz.mood, time, play);
@@ -342,6 +343,18 @@ void gamepr(std::string fname)
 			}
 			if (y == 26) pet::action(&tuz.hlth, time, cure);
 			if (y == 28) pet::action(&tuz.enrg, time, sleep);
+			if (y == 38)
+			{
+				int a;
+				saveorno(&a);
+				if (a == 0)
+				{
+					std::ofstream writesv(filname, std::ios::trunc);
+					writesv << av  <<" "<< tuz.hngr << " " << tuz.mood << " " << tuz.skil << " " << tuz.hlth << " " << tuz.enrg << " " << tuz.age;
+					return;
+				}
+				if (a == 1) return;
+			}
 			system("cls");
 			printpetstatus();
 			std::cout << pctr << std::endl;
