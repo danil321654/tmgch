@@ -30,7 +30,7 @@ void loadgame(bool x,std::string fname)
 	{
 		
 		std::ifstream file;
-		std::string fname1 = "saves//" + fname + ".txt";
+		std::string fname1 = "saves//" + fname + ".mjd";
 		const char * finame = fname1.c_str();
 		file.open(finame);
 
@@ -81,7 +81,7 @@ void loadgame(bool x,std::string fname)
 		bufferSize.X = 49;
 		SetConsoleCursorPosition(hWnd, bufferSize);// peremeshenie kursora
 		getline(std::cin, a);
-		d = "saves//" + a + ".txt";
+		d = "saves//" + a + ".mjd";
 		const char * finame = d.c_str();
 		std::ifstream file;
 		file.open(finame);
@@ -220,7 +220,7 @@ void pet::action(int *a, double tm, int act)
 void gamepr(std::string fname)
 {
 	enum actions{ play = 1, feed,cure,train ,sleep};
-	std::string fname2 = "saves//" + fname + ".txt";
+	std::string fname2 = "saves//" + fname + ".mjd";
 	const char * filname = fname2.c_str();
 	std::ifstream readsv(filname);
 	pet tuz;

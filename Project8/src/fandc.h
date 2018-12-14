@@ -14,6 +14,7 @@ std::string shwdog();
 bool ava(std::string);
 void gamepr(std::string);
 int menu();
+void credits();
 void printmenu();
 void printingamemenu();
 void printpetstatus();

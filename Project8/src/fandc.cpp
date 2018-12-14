@@ -66,6 +66,10 @@ void printmenu()
 									  Credits
 
 									     Exit)" << std::endl;
+	bufferSize.X = 35;
+	bufferSize.Y = 40;
+	SetConsoleCursorPosition(hWnd, bufferSize);
+	std::cout << "Majestic Danilo Inc. 2018. All rights reserved.";
 }
 int menu()
 {
@@ -94,7 +98,9 @@ int menu()
 		if (rusure()) return 0;
 		else menu();
 	}
-	else if (bufferSize.Y == 15)return 0;
+	else if (bufferSize.Y == 15) {
+		credits(); return 0;
+	}
 	else if (bufferSize.Y == 13)loadgame(0, " ");
 	else loadgame(1, ngame()); 
 	}
@@ -316,4 +322,26 @@ void saveorno(int *bol)
 	if (bufferSize.X == 10) *bol=0;
 	else if (bufferSize.X == 59) *bol = 1;
 	else if (bufferSize.X == 111) *bol = 2;
+}
+void credits()
+{
+	setlocale(LC_ALL, "");
+	HANDLE hWnd = GetStdHandle(STD_OUTPUT_HANDLE);
+	COORD bufferSize = { 1200, 600 };
+	bufferSize.X = 35;
+	int y = 40;
+	bufferSize.Y = y;
+	SetConsoleCursorPosition(hWnd, bufferSize);
+	std::cout << "Majestic Danilo Inc. 2018. All rights reserved.";
+		while (y > 0)
+		{
+			system("cls");
+			y--;
+			bufferSize.Y = y;
+			SetConsoleCursorPosition(hWnd, bufferSize);
+			std::cout << "Majestic Danilo Inc. 2018. All rights reserved.";
+			Sleep(100);
+	}
+		system("cls");
+		menu();
 }
